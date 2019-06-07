@@ -14,6 +14,7 @@ double sin(double x) {
     coefficient *= 1.0 / ( (2 * count) * (2 * count + 1) ); // 1/(2n+1)! = 1/(2n-1)! * 1/(2n*(2n+1))
     var *= xx;
     sum += (sgn * coefficient * var);
+    printf("%lf\n",sum);
   }
   return sum;
 }
