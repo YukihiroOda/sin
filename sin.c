@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "sin.h"
 
-
 double Pi = 3.14159265;
 
 /* sin (x) = x - 1/3! x^3 + 1/5! x^5 - 1/7! x^7 + ...... */
@@ -21,7 +20,6 @@ double sin(double x) {
     var *= xx;
     coefficient *= 1.0 / ( (2 * count) * (2 * count + 1) ); // 1/(2n+1)! = 1/(2n-1)! * 1/(2n*(2n+1))
     sum += (sgn * coefficient * var );
-    printf("%lf\n",sum);
   }
   return sum;
 }
