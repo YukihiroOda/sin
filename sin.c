@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "sin.h"
 
-double Pi = 3.14159265;
-
 /* sin (x) = x - 1/3! x^3 + 1/5! x^5 - 1/7! x^7 + ...... */
 /* a_n * var_n =  (-1) * a_{n-1}  * (1/(2n*(2n+1))) * var_{n-1} * x^2   */
 
@@ -10,8 +8,8 @@ double sin(double x) {
   double sum, sgn, term, xx;
   int count;
   while ( !( -Pi <= x && x < Pi ) ) {
-    if ( Pi <= x ) x -= Pi;
-    else x += Pi;
+    if ( Pi <= x ) x -= 2*Pi;
+    else x += 2*Pi;
   }
   xx = x*x;
   sum = x; sgn = 1.0; term = x;
@@ -22,4 +20,3 @@ double sin(double x) {
   }
   return sum;
 }
-
