@@ -5,7 +5,7 @@
 
 int test1(double x){
     if ( !(sin( Pi - x ) - sin(x) <= DBL_EPSILON ) ) return 1;
-    else if ( !(sin( x + 2*Pi ) - sin(x) <= DBL_EPSILON ) ) return 2;
+    else if ( !( sin( x + 2*Pi ) - sin(x) <= DBL_EPSILON ) ) return 2;
     else return 0;
 }
 
