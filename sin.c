@@ -13,7 +13,7 @@ double sin(double x) {
     if ( Pi <= x ) x -= Pi;
     else x += Pi;
   }
-  xx = x*x; 
+  xx = x*x;
   sum = x; sgn = 1.0; term = x;
   for(count = 1 ; count < 100; count++) {
     sgn *= ( -1.0 );
