@@ -17,7 +17,7 @@ int test2(double x, double y){
 int main(void){
   int i, j;
   double x, y;
-  x = -Pi/2;
+  x = -Pi;
   for(i = 0 ; i < 40000  ; i++ ) {
     if( test1(x) ) {
       printf("error:%d x=%lf\n",test1(x),x);
