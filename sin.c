@@ -13,7 +13,7 @@ double sin(double x) {
   }
   xx = x*x;
   sum = x; sgn = 1.0; term = x;
-  for(count = 1 ; count < 1000; count++) {
+  for(count = 1 ; count < 100; count++) {
     sgn *= ( -1.0 );
     term *= xx / ( (2 * count) * (2 * count + 1) ); // x^{2n+1}/(2n+1)! = x^{2n-1}/(2n-1)! * x^2/(2n*(2n+1))
     sum += (sgn * term);
