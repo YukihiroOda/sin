@@ -3,14 +3,26 @@
 #include "sin.h"
 
 
-int test1(double x){
-    if ( !(sin( Pi - x ) - sin(x) <= DBL_EPSILON ) ) return 1;
-    else if ( !( sin( x + 2*Pi ) - sin(x) <= DBL_EPSILON ) ) return 2;
+int testpi(double x){
+  double check;
+  check = sin( Pi - x ) - sin(x);
+  if(check < 0) check = -check; //absolute
+  if ( !(check <= 1.0e-12) ) return 1;
+  else return 0;
+}
+
+int test2pi(double x){
+  double check;
+  check = sin( x + 2*Pi ) - sin(x);
+  if(check < 0) check = -check; //absolute
+    if ( !( check <= 1.0e-12 ) ) return 1;
     else return 0;
 }
 
-int test2(double x, double y){
-  if ( !(sin( x + y ) - (sin(x)*sin(Pi/2 - y) + sin(Pi/2 - x)*sin(y)) <= DBL_EPSILON) ) return 3;
+int testAddThm(double x, double y){
+  double check;
+  check = sin( x + y ) - (sin(x)*sin(Pi/2 - y) + sin(Pi/2 - x)*sin(y));
+  if ( !(check <= DBL_EPSILON) ) return 1;
     else return 0;
 }
 
@@ -19,23 +31,24 @@ int main(void){
   double x, y;
   x = -Pi;
   for(i = 0 ; i < 40000  ; i++ ) {
-    if( test1(x) ) {
-      printf("error:%d x=%lf\n",test1(x),x);
-      if(test1(x)==1) printf("sin(Pi-x) = %lf sin(x) = %lf \n",sin(Pi-x),sin(x));
-      else if(test1(x)==2) printf("sin(x+2*Pi) = %lf sin(x) = %lf \n",sin(x+2*Pi),sin(x));
-      return 0;
+    if( testpi(x) ) {
+      printf("error:testpi x=%.32f\n",x);
+      printf("sin(Pi-x) = %.32f , sin(x) = %.32f ,  sin(Pi-x)-sin(x) = %.32f \n",sin(Pi-x),sin(x), sin(Pi-x)-sin(x));
+    }
+    if( test2pi(x)){
+      printf("error:test2pi x=%.32f\n",x);
+      printf("sin(x+2*Pi) = %.32f , sin(x) = %.32f , sin(x+2*Pi)-sin(x) = %.32f \n",sin(x+2*Pi),sin(x),sin(x+2*Pi) - sin(x));
     }
     for(j = 0 ; j < 40000  ; j++ ) {
       y = -Pi/2;
-      if( test2(x,y) ) {
-	printf("error:%d x = %lf y = %lf\n",test2(x,y),x,y);
-	printf(" sin(x+y) = %lf sin(x) = %lf  sin(Pi/2-y) = %lf sin(Pi/2-x) = %lf sin(y) = %lf\n",sin(x+y),sin(x),sin(Pi/2-y),sin(Pi/2-x), sin(y));
-	return 0;
+      if( testAddThm(x,y) ) {
+	printf("error:y\testAddThm x = %.32f y = %.32f\n",x,y);
+	printf(" sin(x+y) = %.32f , sin(x) = %.32f , sin(Pi/2-y) = %.32f , sin(Pi/2-x) = %.32f , sin(y) = %.32f , sin( x + y ) - (sin(x)*sin(Pi/2 - y) + sin(Pi/2 - x)*sin(y)) = %.32f\n ",sin(x+y),sin(x),sin(Pi/2-y),sin(Pi/2-x), sin(y),sin( x + y ) - (sin(x)*sin(Pi/2 - y) + sin(Pi/2 - x)*sin(y)););
       }
       y += 0.0001;
     }
     x += 0.0001;
   }
-  printf("This sin function is well-defined.\n"); 
+  printf("This sin function may be well-defined.\n");
   return 0;
 }
