@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from functions import sin, vec_sin, mysin
 import math
 import pandas as pd
