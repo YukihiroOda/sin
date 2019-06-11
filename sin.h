@@ -5,4 +5,4 @@ double sin(double);
 
 #endif //_SIN_H_
 
-#define Pi (3.14159265)
+#define Pi (3.141592653589793)
